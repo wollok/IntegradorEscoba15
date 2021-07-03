@@ -1,6 +1,183 @@
+import mazo.*
 
-test "testX" {
+describe "escoba de 15 " {
+	const copa4 = new Carta(numero = 4, palo = 'copa') 
+	const basto1 = new Carta(numero = 1, palo = 'basto')
+	const oros11 = new Carta(numero = 11, palo = 'oros')
+	const oros7 = new Carta(numero = 7, palo = 'oros')
+	const copa10 = new Carta(numero = 10, palo = 'copa')
+	const copa5 = new Carta(numero = 5, palo = 'copa')
+	const oros3 = new Carta(numero = 3, palo = 'oros')
+	const basto12 = new Carta(numero = 12, palo = 'basto')
+	const espada1 = new Carta(numero = 1, palo = 'espada')
+	const oros1 = new Carta(numero = 1, palo = 'oros')
+	
+	const lola = new Jugador(cartas = [copa4,basto1,oros11]) 
+	const cachito = new Jugador(cartas = [oros3,copa5], monton = [oros7,copa10]) 
 
-	assert.that(true)
+	const jugadorConSolo7DeOro= new Jugador(cartas = [oros7]) 
+	const jugadorCon7DeOroYOtras= new Jugador(cartas = [oros7,copa4,basto1]) 
+	
+	method mesaEjemplo() {
+		mesa.jugadores().addAll([lola,cachito])
+		mesa.agregarCarta(espada1)
+		mesa.agregarCarta(basto12)
+		mesa.agregarCarta(oros1)
+	}
+	
+	method hay7DeOroEnMazo(mazo) = mazo.cartas().any{c=>c.es7DeOro()}
+	
+
+
+test "lola no puede hacer escoba" {
+	self.mesaEjemplo()
+	assert.notThat(lola.puedeHacerEscoba())
+}
+
+test "cachito puede hacer escoba" {
+	self.mesaEjemplo()
+	assert.that(cachito.puedeHacerEscoba())
+}
+
+test "cachito sin jugar tiene 2 cartas" {
+	assert.equals(2, cachito.cantidadCartas())
+}
+
+test "cachito juega, hace escoba y tiene mas cartas" {
+	self.mesaEjemplo()
+	cachito.jugada()
+	assert.equals(2 + 4, cachito.cantidadCartas())
+}
+
+test "lola juega, no puede hacer escoba y tira una carta" {
+	self.mesaEjemplo()
+	lola.jugada()
+	assert.equals(3 + 1, mesa.cartas().size())
+}
+
+
+// ACTITIDES DE JUEGO
+
+test "jugador distraido, tira la primera" {
+	self.mesaEjemplo()
+	lola.jugada()
+	assert.that(mesa.cartas().contains(copa4))
+}
+
+test "jugador precavido, evita tirar 7 de oros " {
+	self.mesaEjemplo()
+	jugadorCon7DeOroYOtras.actitud(precavido)
+	jugadorCon7DeOroYOtras.jugada()
+	assert.notThat(mesa.cartas().contains(oros7))
+}
+
+test "jugador precavido, no tiene alternativa y tira 7 de oros " {
+	self.mesaEjemplo()
+	jugadorConSolo7DeOro.actitud(precavido)
+	jugadorConSolo7DeOro.jugada()
+	assert.that(mesa.cartas().contains(oros7))
+}
+
+// PUNTAJES
+
+test "cachito tiene un punto por mas cartas" {
+	self.mesaEjemplo()
+	assert.equals(1,cachito.puntosMasCartas())
+}
+
+test "lola no tiene puntos por mas cartas" {
+	self.mesaEjemplo()
+	assert.equals(0,lola.puntosMasCartas())
+}
+
+test "cachito tiene un punto por 7 de oro" {
+	self.mesaEjemplo()
+	assert.equals(1,cachito.puntos7DeOro())
+}
+
+test "lola no tiene puntos por 7 de oro" {
+	self.mesaEjemplo()
+	assert.equals(0,lola.puntos7DeOro())
+}
+
+test "cachito tiene 2 puntos" {
+	self.mesaEjemplo()
+	assert.equals(2,cachito.puntaje())
+}
+
+test "cachito hace escoba y tiene 3 puntos" {
+	self.mesaEjemplo()
+	cachito.jugada()
+	assert.equals(3,cachito.puntaje())
+}
+
+
+// MAZOS
+
+test "generacion mazo español con 40 cartas" {
+	
+	const mazo = new MazoEspanol()
+	mazo.generar()
+	assert.equals(40, mazo.cartas().size())
+	
+}
+
+test "mazo español tiene 7 de oro" {
+	
+	const mazo = new MazoEspanol()
+	mazo.generar()
+	assert.that(self.hay7DeOroEnMazo(mazo) )
+	
+}
+
+test "generacion mazo frances con 52 cartas" {
+	
+	const mazo = new MazoFrances()
+	mazo.generar()
+	assert.equals(52, mazo.cartas().size())
+	
+}
+
+test "mazo frances tiene 7 de oro" {
+	
+	const mazo = new MazoFrances()
+	mazo.generar()
+	assert.that(self.hay7DeOroEnMazo(mazo) )
+	
+}
+
+test "mazo con estilo español tiene 40 cartas" {
+
+	const mazo = new MazoConEstilo(estilo = espanol) 
+	mazo.generar()
+	assert.equals(40, mazo.cartas().size())
+	
+}
+	
+
+test "mazo con estilo frances tiene 52 cartas" {
+	
+	const mazo = new MazoConEstilo(estilo = frances)
+	mazo.generar()
+	assert.equals(52, mazo.cartas().size())
+	
+}
+
+test "mazo con comodines tiene mas cartas"{
+	const mazo = new MazoConComodines(estilo = frances, cantidadComodines = 2)
+	mazo.generar()
+	assert.equals(54, mazo.cartas().size())
+}
+
+
+test "Comodin sin sustitucion lanza excepcion"{
+	const comodin = new Comodin()
+	assert.throwsExceptionWithType(new ComodinException(), {comodin.valor()})
+}
+
+test "Comodin que sustituye 7 de oro es el 7 de oro"{
+	const comodin = new Comodin(carta = oros7)
+	assert.that(comodin.es7DeOro())
+}
 
 }
