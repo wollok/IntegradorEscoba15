@@ -2,6 +2,7 @@
 
 **Ejercicio integrador**
 
+![](escoba.png)
 
 Uno de los juegos clásicos de cartas es el denominado "escoba de 15". Es un juego de origen hispánico, muy difundido en Argentina y otros países de la región, que se juega con un mazo de cartas españolas.
 Como suele suceder en este tipo de juegos existen variantes en algunas reglas y es difícil establecer cuál es el reglamento "oficial" ([pueden ver uno acá](https://www.wikiwand.com/es/Escoba_del_15)). Por lo tanto, vamos a definir nuestras propias reglas de juego, lo que nos permite simplificar algunos aspectos, limitarnos a implementar algunas de las funcionalidades e introducir variantes que resulten interesantes. 
