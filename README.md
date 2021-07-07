@@ -58,13 +58,12 @@ Inventar un nueva forma de estar en el juego que implique otro criterio de elegi
 Intentando sumar nuevos adeptos, surgen algunas variantes en el juego.
 
 1. Para el público de otras latitudes, se quiere incluir la posibilidad de jugar con cartas francesas (los palos son diamante, corazón, pica y trébol, y los valores son la A, números del 2 al 10, la J, Q y K) Realizar las modificaciones necesarias para permitir jugar tanto con cartas españolas como franceses e incluso mezclando los mazos. (por ejemplo, se puede tomar a diamante como oros y buscarle un valor acorde a las cartas con letras)
-
 2. Agregar una nueva tarea que es generar un mazo: se desea poder armar un mazo (puede ser de cartas españolas o francesas) de manera que sabiendo cuáles son los palos y los números, se creen todas las cartas correspondientes. 
-3. Se quiere poder generar mazos que contengan también una cierta cantidad de comodines. Los comodines son cartas especiales que no tienen literalmente un número o un palo, pero asumen los valores propios de la carta a la que el jugador desea que reemplacen. Incluirlos de manera que se pueda jugar a la escoba de 15 con comodines, considerando que si el jugador ya estableció el comodín a qué carta sustituye, se usa y contabiliza como dicha carta (no está contemplado qué debe suceder en el juego si no se sabe a qué carta refiere el comodín, por lo que se debe advertir apropiadamente de dicha situación) 
-4. ¿Qué nuevos cambios implicaría agregar otros tipos de mazo o cartas? Justificar conceptualmente. En particular, plantear una situación hipotética en la cual la herencia sea de utilidad? 
+4. Se quiere poder generar mazos que contengan también una cierta cantidad de comodines. Los comodines son cartas especiales que no tienen literalmente un número o un palo, pero asumen los valores propios de la carta a la que el jugador desea que reemplacen. Incluirlos de manera que se pueda jugar a la escoba de 15 con comodines, considerando que si el jugador ya estableció el comodín a qué carta sustituye, se usa y contabiliza como dicha carta (no está contemplado qué debe suceder en el juego si no se sabe a qué carta refiere el comodín, por lo que se debe advertir apropiadamente de dicha situación) 
+5. ¿Qué nuevos cambios implicaría agregar otros tipos de mazo o cartas? Justificar conceptualmente. En particular, plantear una situación hipotética en la cual la herencia sea de utilidad? 
 
 
 ### Pruebas
 Hacer tests de los principales items
 
-[Consigna](https://docs.google.com/document/d/1FnnmSwEuaWQN_L8nA4MWfyL30quYUmusHO9z5p_Onco/)
+
