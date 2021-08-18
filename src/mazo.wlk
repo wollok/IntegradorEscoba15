@@ -4,9 +4,7 @@ class Carta {
 	const palo
 
 	method valor() = if (numero <= 7) numero else numero - 2
-
 	method esDeOro() = palo == 'oros'
-
 	method es7DeOro() = self.valor() == 7 && self.esDeOro()
 
 }
