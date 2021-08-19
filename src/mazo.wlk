@@ -10,7 +10,7 @@ class Carta {
 }
 
 object mesa {
-
+ 
 	const property cartas = []
 	const property jugadores = []
 
